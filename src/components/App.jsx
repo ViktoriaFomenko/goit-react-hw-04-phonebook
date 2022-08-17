@@ -3,6 +3,8 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
   const [contacts, setContacts] = useState(() => {
@@ -27,7 +29,7 @@ export const App = () => {
     });
 
     if (duplicationName) {
-      alert(`${name} is already in contacts.`);
+      toast.warn(`${name} is already in contacts.`);
     } else {
       setContacts(prevContacts => [contact, ...prevContacts]);
     }
@@ -51,6 +53,7 @@ export const App = () => {
 
   return (
     <>
+      <ToastContainer autoClose={2000} position="top-center" closeOnClick />
       <h1>Phonebook</h1>
       <ContactForm onSubmit={addContact} />
       <h2>Contacts</h2>
